@@ -1,10 +1,6 @@
-import http from "http";
+import app from "./src/app.js";
+import { PORT } from "./src/Models/Constants.js";
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Curso Node JS");
-});
-
-server.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("Server is Working...");
 });
