@@ -1,4 +1,3 @@
-import "dotenv/config";
 import mongoose, { mongo } from "mongoose";
 
 const databaseLogin = process.env.DATABASE_LOGIN;
