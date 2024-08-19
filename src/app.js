@@ -1,6 +1,6 @@
 import express from "express";
 import { OK_STATUS } from "./Models/Constants.js";
-import connectDatabase from "./config/DbConnect.js";
+import connectDatabase from "./Context/DbConnect.js";
 
 const dbConnect = await connectDatabase();
 
