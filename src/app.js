@@ -17,11 +17,6 @@ dbConnect.once("open", () => {
 
 const app = express();
 
-app.get("/expense", async (req, res) => {
-  const expenseList = await expense.find({});
-  res.status(200).json(expenseList);
-});
-
 app.get("/", (req, res) => {
   res.status(OK_STATUS).send("Express API working...");
 });
