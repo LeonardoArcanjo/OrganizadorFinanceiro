@@ -1,7 +1,7 @@
 import express from "express";
 import { OK_STATUS } from "./Models/Constants.js";
 import connectDatabase from "./Context/DbConnect.js";
-import expense from "./Context/FinanceContext.js";
+import routes from "./routes/index.js";
 
 const dbConnect = await connectDatabase();
 
@@ -16,9 +16,6 @@ dbConnect.once("open", () => {
 });
 
 const app = express();
-
-app.get("/", (req, res) => {
-  res.status(OK_STATUS).send("Express API working...");
-});
+routes(app);
 
 export default app;
