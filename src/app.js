@@ -1,5 +1,4 @@
 import express from "express";
-import { OK_STATUS } from "./Models/Constants.js";
 import connectDatabase from "./Context/DbConnect.js";
 import routes from "./routes/index.js";
 
