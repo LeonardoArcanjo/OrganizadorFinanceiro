@@ -1,4 +1,4 @@
-import expense from "../Context/FinanceContext.js";
+import expense from "../Context/Expense.js";
 import {
   CREATE_STATUS,
   INTERNAL_SERVER_ERROR_STATUS,
