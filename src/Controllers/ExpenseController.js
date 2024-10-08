@@ -50,7 +50,7 @@ class ExpenseController {
     } catch (error) {
       res
         .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${erro.message} - fail to insert expense` });
+        .json({ message: `${error.message} - fail to insert expense` });
     }
   }
 
