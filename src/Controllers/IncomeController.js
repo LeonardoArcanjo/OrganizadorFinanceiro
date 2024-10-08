@@ -29,6 +29,57 @@ class IncomeController {
         .json({ message: `${error.message} - request error` });
     }
   }
+
+  static async getIncomeByCategory(req, res) {
+    try {
+      const category = req.params.category;
+      const incomeByCategoryList = await income.find({
+        category: `${category}`,
+      });
+      res.status(OK_STATUS).json(incomeByCategoryList);
+    } catch (error) {
+      res
+        .status(INTERNAL_SERVER_ERROR_STATUS)
+        .json({ message: `${error.message} - request error` });
+    }
+  }
+
+  static async updateIncome(req, res) {
+    try {
+      const id = req.params.id;
+      await income.findByIdAndUpdate(id, req.body);
+      res.status(OK_STATUS).json({ message: "Income Updated!" });
+    } catch (error) {
+      res
+        .status(INTERNAL_SERVER_ERROR_STATUS)
+        .json({ message: `${error.message} - update request error` });
+    }
+  }
+
+  static async insertIncome(req, res) {
+    try {
+      const newIncome = await income.create(req.body);
+      res
+        .status(CREATE_STATUS)
+        .json({ message: "Income created successfully", income: newIncome });
+    } catch (error) {
+      res
+        .status(INTERNAL_SERVER_ERROR_STATUS)
+        .json({ message: `${error.message} - fail to create income` });
+    }
+  }
+
+  static async deleteIncome(req, res) {
+    try {
+      const id = req.params.id;
+      await income.findByIdAndDelete(id);
+      res.status(OK_STATUS).json({ message: "Income deleted!" });
+    } catch (error) {
+      res
+        .status(INTERNAL_SERVER_ERROR_STATUS)
+        .json({ message: `${error.message} - delete request error` });
+    }
+  }
 }
 
 export default IncomeController;
