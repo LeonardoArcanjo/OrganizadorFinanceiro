@@ -1,6 +1,5 @@
 import mongoose, { Types } from "mongoose";
 import { ExpenseSchema } from "./Expense.js";
-import { type } from "express/lib/response.js";
 const { Schema } = mongoose;
 
 const CreditCardExpenseSchema = new Schema(
@@ -14,6 +13,9 @@ const CreditCardExpenseSchema = new Schema(
   { versionKey: false }
 );
 
-const CreditCardExpense = mongoose.model("CreditCard", CreditCardExpenseSchema);
+const CreditCardExpense = mongoose.model(
+  "CreditCardExpense",
+  CreditCardExpenseSchema
+);
 
 export default CreditCardExpense;
