@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const databaseLogin = process.env.DATABASE_LOGIN;
 const databasePwd = encodeURIComponent(process.env.DATABASE_PASSWORD); // encodeURIComponent is called in case password has special characters
