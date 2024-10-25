@@ -2,8 +2,8 @@ import { NOT_FOUND_STATUS } from "../Models/Constants.js";
 import ErrorBase from "./ErrorBase.js";
 
 class NotFound extends ErrorBase {
-  constructor() {
-    super("Page not found", NOT_FOUND_STATUS);
+  constructor(message = "Page not found") {
+    super(message, NOT_FOUND_STATUS);
   }
 }
 
