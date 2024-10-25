@@ -1,9 +1,5 @@
-import CreditCardExpense from "../Context/CreditCard.js";
-import {
-  CREATE_STATUS,
-  INTERNAL_SERVER_ERROR_STATUS,
-  OK_STATUS,
-} from "../Models/Constants";
+import { CreditCardExpense } from "../Context/CreditCard.js";
+import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class CreditCardController {
   static async getAllCreditCardExpenses(req, res, next) {

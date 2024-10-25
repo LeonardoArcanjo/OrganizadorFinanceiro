@@ -1,8 +1,5 @@
 import investiment from "../Context/Investiment.js";
-import {
-  CREATE_STATUS,
-  OK_STATUS,
-} from "../Models/Constants";
+import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class InvestimentController {
   static async getAllInvestments(req, res, next) {

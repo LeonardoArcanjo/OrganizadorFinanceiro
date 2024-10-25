@@ -1,9 +1,5 @@
 import CreditCardBill from "../Context/CreditCardBill.js";
-import {
-  CREATE_STATUS,
-  INTERNAL_SERVER_ERROR_STATUS,
-  OK_STATUS,
-} from "../Models/Constants";
+import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class CreditCardBillController {
   // GET endpoints

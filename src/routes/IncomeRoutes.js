@@ -1,16 +1,14 @@
-import IncomeController from "../Controllers/IncomeController";
+import IncomeController from "../Controllers/IncomeController.js";
 import express from "express";
 
-const routes = express.Router();
+const router = express.Router();
 
-routes.get("/income", IncomeController.getAllIncomes);
-routes.get("/income/:id", IncomeController.getIncomeById);
-routes.get("/income/:category", IncomeController.getIncomeByCategory);
+router
+  .get("/income", IncomeController.getAllIncomes)
+  .get("/income/:id", IncomeController.getIncomeById)
+  .get("/income/:category", IncomeController.getIncomeByCategory)
+  .post("/income", IncomeController.insertIncome)
+  .put("/income/:id", IncomeController.updateIncome)
+  .delete("/income/:id", IncomeController.deleteIncome);
 
-routes.post('/income', IncomeController.insertIncome);
-
-routes.put('/income/:id', IncomeController.updateIncome);
-
-routes.delete("/income/:id", IncomeController.deleteIncome);
-
-export default routes;
+export default router;

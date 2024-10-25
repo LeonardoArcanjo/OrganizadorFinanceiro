@@ -1,5 +1,5 @@
 import express from "express";
-import CreditCardBillController from "../Controllers/CreditCardBillController";
+import CreditCardBillController from "../Controllers/CreditCardBillController.js";
 
 const router = express.Router();
 

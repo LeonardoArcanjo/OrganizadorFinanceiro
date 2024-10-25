@@ -1,8 +1,5 @@
 import income from "../Context/Income.js";
-import {
-  CREATE_STATUS,
-  OK_STATUS,
-} from "../Models/Constants";
+import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class IncomeController {
   static async getAllIncomes(req, res, next) {
