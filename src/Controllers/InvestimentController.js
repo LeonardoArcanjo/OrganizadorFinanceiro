@@ -1,7 +1,6 @@
 import investiment from "../Context/Investiment.js";
 import {
   CREATE_STATUS,
-  INTERNAL_SERVER_ERROR_STATUS,
   OK_STATUS,
 } from "../Models/Constants";
 
