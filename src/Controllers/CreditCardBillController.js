@@ -7,30 +7,26 @@ import {
 
 class CreditCardBillController {
   // GET endpoints
-  static async getAllCreditCardBill(req, res) {
+  static async getAllCreditCardBill(req, res, next) {
     try {
       const ccBill = await CreditCardBill.find({});
       res.status(OK_STATUS).json(ccBill);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - request error` });
+      next(error);
     }
   }
 
-  static async getCCBillById(req, res) {
+  static async getCCBillById(req, res, next) {
     try {
       const ccBillId = req.params.id;
       const ccBill = await CreditCardBill.findById(ccBillId);
       res.status(OK_STATUS).json(ccBill);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message}` });
+      next(error);
     }
   }
 
-  static async getCCBillByBank(req, res) {
+  static async getCCBillByBank(req, res, next) {
     try {
       const bankName = req.params.bankName;
       const ccBillListByBank = await CreditCardBill.find({
@@ -40,13 +36,11 @@ class CreditCardBillController {
       });
       res.status(OK_STATUS).json(ccBillListByBank);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message}` });
+      next(error);
     }
   }
 
-  static async getCCBillByMonthAndYear(req, res) {
+  static async getCCBillByMonthAndYear(req, res, next) {
     try {
       const month = req.params.month;
       const year = req.params.year;
@@ -56,14 +50,12 @@ class CreditCardBillController {
       });
       res.status(OK_STATUS).json(ccBillList);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message}` });
+      next(error);
     }
   }
 
   // POST Endpoints
-  static async insertCCBill(req, res) {
+  static async insertCCBill(req, res, next) {
     try {
       const newCCBill = await CreditCardBill.create(req.body);
       res.status(CREATE_STATUS).json({
@@ -71,35 +63,29 @@ class CreditCardBillController {
         creditCardBill: newCCBill,
       });
     } catch (error) {
-      res.status(INTERNAL_SERVER_ERROR_STATUS).json({
-        message: `${error.message} - fail to create Credit Card Bill`,
-      });
+      next(error);
     }
   }
 
   // Update Endpoints
-  static async updateCCBillById(req, res) {
+  static async updateCCBillById(req, res, error) {
     try {
       const ccBillId = req.params.id;
       await CreditCardBill.findByIdAndUpdate(ccBillId, req.body);
       res.status(OK_STATUS).json({ message: "Credit Card Bill Updated!" });
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message}` });
+      next(error);
     }
   }
 
   // DELETE Endpoints
-  static async deleteCCBill(req, res) {
+  static async deleteCCBill(req, res, next) {
     try {
       const id = req.params.id;
       await CreditCardBill.findByIdAndDelete(id);
       res.status(OK_STATUS).json({ message: "Credit Card Bill deleted!" });
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - delete request error` });
+      next(error);
     }
   }
 }
