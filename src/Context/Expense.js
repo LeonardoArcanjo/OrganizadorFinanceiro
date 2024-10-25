@@ -3,9 +3,18 @@ import mongoose from "mongoose";
 const ExpenseSchema = new mongoose.Schema(
   {
     id: { type: mongoose.Schema.Types.ObjectId },
-    name: { type: String, required: true },
-    value: { type: Number, required: true },
-    category: { type: String, required: true },
+    name: {
+      type: String,
+      required: [true, "Name property value is required."],
+    },
+    value: {
+      type: Number,
+      required: [true, "Value property value is required"],
+    },
+    category: {
+      type: String,
+      required: [true, "Category property is required"],
+    },
     isFixed: { type: Boolean },
   },
   { versionKey: false }
