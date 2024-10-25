@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import CreditCardExpense from "./CreditCard.js";
+import { CreditCardExpenseSchema } from "./CreditCard.js";
 const { Schema } = mongoose;
 
 const CreditCardBillSchema = new Schema(
@@ -11,7 +11,7 @@ const CreditCardBillSchema = new Schema(
     openDate: { type: Date, required: true },
     value: { type: Number, required: true },
     dueDate: { type: Date, required: true },
-    expenseList: [CreditCardExpense],
+    expenseList: [CreditCardExpenseSchema],
   },
   { versionKey: false }
 );

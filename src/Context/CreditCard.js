@@ -18,4 +18,4 @@ const CreditCardExpense = mongoose.model(
   CreditCardExpenseSchema
 );
 
-export default CreditCardExpense;
+export { CreditCardExpense, CreditCardExpenseSchema };
