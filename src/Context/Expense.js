@@ -13,7 +13,7 @@ const ExpenseSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: [true, "Category property is required"],
+      required: [true, "Category property value is required"],
     },
     isFixed: { type: Boolean },
   },
