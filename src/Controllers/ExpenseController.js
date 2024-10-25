@@ -1,8 +1,6 @@
 import { expense } from "../Context/Expense.js";
-import {
-  CREATE_STATUS,
-  OK_STATUS,
-} from "../Models/Constants.js";
+import NotFound from "../Errors/NotFound.js";
+import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class ExpenseController {
   static async getAllExpenses(req, res, next) {
@@ -18,7 +16,12 @@ class ExpenseController {
     try {
       const id = req.params.id;
       const expenseFound = await expense.findById(id);
-      res.status(OK_STATUS).json(expenseFound);
+
+      if (expenseFound !== null) {
+        res.status(OK_STATUS).json(expenseFound);
+      } else {
+        next(new NotFound("Expense not found"));
+      }
     } catch (error) {
       next(error);
     }
