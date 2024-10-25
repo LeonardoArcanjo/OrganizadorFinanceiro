@@ -12,3 +12,5 @@ routes.post('/income', IncomeController.insertIncome);
 routes.put('/income/:id', IncomeController.updateIncome);
 
 routes.delete("/income/:id", IncomeController.deleteIncome);
+
+export default routes;
