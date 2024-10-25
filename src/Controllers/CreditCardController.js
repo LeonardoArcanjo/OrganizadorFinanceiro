@@ -5,7 +5,7 @@ import {
   OK_STATUS,
 } from "../Models/Constants";
 
-class CrediCardController {
+class CreditCardController {
   static async getAllCreditCardExpenses(req, res, next) {
     try {
       const ccExpenseList = await CreditCardExpense.find({});
@@ -70,4 +70,4 @@ class CrediCardController {
   }
 }
 
-export default CrediCardController;
+export default CreditCardController;
