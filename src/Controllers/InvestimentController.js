@@ -6,18 +6,26 @@ import {
 } from "../Models/Constants";
 
 class InvestimentController {
-  static async getAllInvestments(req, res) {
+  static async getAllInvestments(req, res, next) {
     try {
       const investimentList = await investiment.find({});
       res.status(OK_STATUS).json(investimentList);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - request error` });
+      next(error);
     }
   }
 
-  static async getInvestmentByCategory(req, res) {
+  static async getInvestmentById(req, res, next) {
+    try {
+      const id = req.params.id;
+      const investimentByCategoryList = await investiment.findById(id);
+      res.status(OK_STATUS).json(investimentByCategoryList);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getInvestmentByCategory(req, res, next) {
     try {
       const category = req.params.category;
       const investimentByCategoryList = await investiment.find({
@@ -25,25 +33,21 @@ class InvestimentController {
       });
       res.status(OK_STATUS).json(investimentByCategoryList);
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - request error` });
+      next(error)
     }
   }
 
-  static async updateInvestiment(req, res) {
+  static async updateInvestiment(req, res, next) {
     try {
       const id = req.params.id;
       await investiment.findByIdAndUpdate(id, req.body);
       res.status(OK_STATUS).json({ message: "Investment Updated!" });
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - update request error` });
+      next(error);
     }
   }
 
-  static async insertIncome(req, res) {
+  static async insertInvestment(req, res, next) {
     try {
       const newInvestiment = await investiment.create(req.body);
       res.status(CREATE_STATUS).json({
@@ -51,21 +55,17 @@ class InvestimentController {
         income: newInvestiment,
       });
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - fail to create investiment` });
+      next(error);
     }
   }
 
-  static async deleteIncome(req, res) {
+  static async deleteInvestment(req, res, next) {
     try {
       const id = req.params.id;
       await investiment.findByIdAndDelete(id);
       res.status(OK_STATUS).json({ message: "Investment deleted!" });
     } catch (error) {
-      res
-        .status(INTERNAL_SERVER_ERROR_STATUS)
-        .json({ message: `${error.message} - delete request error` });
+      next(error);
     }
   }
 }
