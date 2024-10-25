@@ -20,7 +20,6 @@ app.use(express.json());
 routes(app);
 
 //Error Middleware creation
-
 app.use(ErrorRequestHandler);
 
 export default app;
