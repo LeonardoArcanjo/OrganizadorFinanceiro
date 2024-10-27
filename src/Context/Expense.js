@@ -9,13 +9,17 @@ const ExpenseSchema = new mongoose.Schema(
     },
     value: {
       type: Number,
+      min: [
+        0,
+        "The min value for the value property must be greater or equal to 0",
+      ],
       required: [true, "Value property value is required"],
     },
     category: {
       type: String,
       required: [true, "Category property value is required"],
     },
-    isFixed: { type: Boolean },
+    isFixed: { type: Boolean, required: [true, "isFixed value is required"] },
   },
   { versionKey: false }
 );
