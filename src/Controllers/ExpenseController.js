@@ -1,4 +1,5 @@
 import { expense } from "../Context/Expense.js";
+import ErrorValidation from "../Errors/ErrorValidation.js";
 import NotFound from "../Errors/NotFound.js";
 import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
@@ -20,7 +21,7 @@ class ExpenseController {
       if (expenseFound !== null) {
         res.status(OK_STATUS).json(expenseFound);
       } else {
-        next(new NotFound("Expense not found"));
+        next(new NotFound("Expense not found!"));
       }
     } catch (error) {
       next(error);
@@ -30,8 +31,13 @@ class ExpenseController {
   static async updateExpense(req, res, next) {
     try {
       const id = req.params.id;
-      await expense.findByIdAndUpdate(id, req.body);
-      res.status(OK_STATUS).json({ message: "Expense updated!" });
+      const expenseFound = await expense.findByIdAndUpdate(id, req.body);
+
+      if (expenseFound !== null) {
+        res.status(OK_STATUS).json({ message: "Expense updated!" });
+      } else {
+        next(new NotFound("Expense not found!"));
+      }
     } catch (error) {
       next(error);
     }
@@ -51,8 +57,13 @@ class ExpenseController {
   static async deleteExpenseById(req, res, next) {
     try {
       const id = req.params.id;
-      await expense.findByIdAndDelete(id);
-      res.status(OK_STATUS).json({ message: "expense deleted!" });
+      const expenseFound = await expense.findByIdAndDelete(id);
+
+      if (expenseFound !== null) {
+        res.status(OK_STATUS).json({ message: "expense deleted!" });
+      } else {
+        next(new NotFound("Expense not found!"));
+      }
     } catch (error) {
       next(error);
     }
