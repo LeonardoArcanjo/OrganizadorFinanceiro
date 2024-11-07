@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .get("/expense", ExpenseController.getAllExpenses)
+  .get("/expense/search", ExpenseController.searchExpense)
   .get("/expense/:id", ExpenseController.getExpenseById)
   .post("/expense", ExpenseController.insertExpense)
   .put("/expense/:id", ExpenseController.updateExpense)
