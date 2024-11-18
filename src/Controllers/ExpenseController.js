@@ -6,7 +6,13 @@ import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 class ExpenseController {
   static async getAllExpenses(req, res, next) {
     try {
-      const expenseList = await expense.find({});
+      const { range = 5, page = 1 } = req.query;
+      const expenseList = await expense
+        .find()
+        .skip((page - 1) * range)
+        .limit(range)
+        .populate()
+        .exec();
       res.status(OK_STATUS).json(expenseList);
     } catch (error) {
       next(error);
