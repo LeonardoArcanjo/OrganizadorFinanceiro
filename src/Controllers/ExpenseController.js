@@ -1,19 +1,27 @@
 import { expense } from "../Context/Expense.js";
-import ErrorValidation from "../Errors/ErrorValidation.js";
+import ErrorRequest from "../Errors/ErrorRequest.js";
 import NotFound from "../Errors/NotFound.js";
 import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 
 class ExpenseController {
   static async getAllExpenses(req, res, next) {
     try {
-      const { range = 5, page = 1 } = req.query;
-      const expenseList = await expense
-        .find()
-        .skip((page - 1) * range)
-        .limit(range)
-        .populate()
-        .exec();
-      res.status(OK_STATUS).json(expenseList);
+      let { range = 5, page = 1 } = req.query;
+
+      range = parseInt(range);
+      page = parseInt(page);
+
+      if (range > 0 && page > 0) {
+        const expenseList = await expense
+          .find()
+          .skip((page - 1) * range)
+          .limit(range)
+          .populate()
+          .exec();
+        res.status(OK_STATUS).json(expenseList);
+      } else {
+        next(new ErrorRequest());
+      }
     } catch (error) {
       next(error);
     }
