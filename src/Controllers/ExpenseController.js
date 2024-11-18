@@ -1,27 +1,13 @@
 import { expense } from "../Context/Expense.js";
-import ErrorRequest from "../Errors/ErrorRequest.js";
 import NotFound from "../Errors/NotFound.js";
 import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 
 class ExpenseController {
   static async getAllExpenses(req, res, next) {
     try {
-      let { range = 5, page = 1 } = req.query;
-
-      range = parseInt(range);
-      page = parseInt(page);
-
-      if (range > 0 && page > 0) {
-        const expenseList = await expense
-          .find()
-          .skip((page - 1) * range)
-          .limit(range)
-          .populate()
-          .exec();
-        res.status(OK_STATUS).json(expenseList);
-      } else {
-        next(new ErrorRequest());
-      }
+      const searchExpense = expense.find();
+      req.response = searchExpense;
+      next();
     } catch (error) {
       next(error);
     }
@@ -45,12 +31,13 @@ class ExpenseController {
   static async searchExpense(req, res, next) {
     try {
       let search = searchQueryHandler(req.query);
-      const searchResult = await expense.find(search);
 
-      if (searchResult.length === 0) {
+      if (search !== null) {
+        const searchResult = expense.find(search);
+        req.response = searchResult;
+        next();
+      } else if (searchResult.length === 0) {
         res.status(NO_CONTENT).json(searchResult);
-      } else {
-        res.status(OK_STATUS).json(searchResult);
       }
     } catch (error) {
       next(error);
