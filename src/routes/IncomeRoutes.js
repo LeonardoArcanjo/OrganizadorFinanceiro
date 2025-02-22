@@ -1,10 +1,11 @@
 import IncomeController from "../Controllers/IncomeController.js";
 import express from "express";
+import paginator from "../Middleware/Pagination.js";
 
 const router = express.Router();
 
 router
-  .get("/income", IncomeController.getAllIncomes)
+  .get("/income", IncomeController.getAllIncomes, paginator)
   .get("/income/:id", IncomeController.getIncomeById)
   .get("/income/:category", IncomeController.getIncomeByCategory)
   .post("/income", IncomeController.insertIncome)
