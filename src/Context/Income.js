@@ -16,9 +16,9 @@ const IncomeSchema = new Schema(
       ],
       required: [true, "Value property value is required"],
     },
-    from: {
+    category: {
       type: String,
-      required: [true, "The from property value is required"],
+      required: [true, "The category property value is required"],
     },
   },
   { versionKey: false }
