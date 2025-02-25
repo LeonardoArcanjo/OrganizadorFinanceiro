@@ -5,8 +5,8 @@ import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 class ExpenseController {
   static async getAllExpenses(req, res, next) {
     try {
-      const searchExpense = expense.find();
-      req.response = searchExpense;
+      const expenses = expense.find();
+      req.response = expenses;
       next();
     } catch (error) {
       next(error);

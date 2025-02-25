@@ -1,14 +1,15 @@
 import express from "express";
-import InvestimentController from "../Controllers/InvestimentController.js";
+import InvestmentController from "../Controllers/InvestmentController.js";
+import paginator from "../Middleware/Pagination.js";
 
 const router = express.Router();
 
 router
-  .get("/investment", InvestimentController.getAllInvestments)
-  .get("/investment/:Category", InvestimentController.getInvestmentByCategory)
-  .get("/investment/:id", InvestimentController.getInvestmentById)
-  .put("/investment/:id", InvestimentController.updateInvestiment)
-  .post("/investment/:id", InvestimentController.insertInvestment)
-  .delete("/investment/:id", InvestimentController.deleteInvestment);
+  .get("/investment", InvestmentController.getAllInvestments, paginator)
+  .get("/investment/search", InvestmentController.searchInvestment, paginator)
+  .get("/investment/:id", InvestmentController.getInvestmentById)
+  .post("/investment", InvestmentController.insertInvestment)
+  .put("/investment/:id", InvestmentController.updateInvestment)
+  .delete("/investment/:id", InvestmentController.deleteInvestment);
 
 export default router;
