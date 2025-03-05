@@ -18,9 +18,9 @@ const CreditCardExpenseSchema = new Schema(
   { versionKey: false }
 );
 
-const CreditCardExpense = mongoose.model(
+const creditCardExpense = mongoose.model(
   "CreditCardExpense",
   CreditCardExpenseSchema
 );
 
-export { CreditCardExpense, CreditCardExpenseSchema };
+export { creditCardExpense, CreditCardExpenseSchema };
