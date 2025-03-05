@@ -20,6 +20,7 @@ const ExpenseSchema = new mongoose.Schema(
       required: [true, "Category property value is required"],
     },
     isFixed: { type: Boolean, required: [true, "isFixed value is required"] },
+    date: { type: Date, required: [true, "Date is required."] },
   },
   { versionKey: false }
 );
