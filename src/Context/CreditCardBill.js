@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import { CreditCardExpenseSchema } from "./CreditCard.js";
+import { CreditCardExpenseSchema } from "./CreditCardExpense.js";
 const { Schema } = mongoose;
 
 const CreditCardBillSchema = new Schema(
