@@ -1,7 +1,7 @@
-import { CreditCardExpense } from "../Context/CreditCard.js";
+import { CreditCardExpense } from "../Context/CreditCardExpense.js";
 import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
-class CreditCardController {
+class CreditCardExpenseController {
   static async getAllCreditCardExpenses(req, res, next) {
     try {
       const ccExpenseList = await CreditCardExpense.find({});
@@ -66,4 +66,4 @@ class CreditCardController {
   }
 }
 
-export default CreditCardController;
+export default CreditCardExpenseController;
