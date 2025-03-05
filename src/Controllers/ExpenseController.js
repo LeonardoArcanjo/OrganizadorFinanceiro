@@ -3,7 +3,7 @@ import NotFound from "../Errors/NotFound.js";
 import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 
 class ExpenseController {
-  static async getAllExpenses(req, res, next) {
+  static getAllExpenses(req, res, next) {
     try {
       const expenses = expense.find();
       req.response = expenses;
@@ -28,7 +28,7 @@ class ExpenseController {
     }
   }
 
-  static async searchExpense(req, res, next) {
+  static searchExpense(req, res, next) {
     try {
       let search = searchQueryHandler(req.query);
 
