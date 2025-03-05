@@ -4,7 +4,7 @@ import investment from "./InvestimentRoutes.js";
 import income from "./IncomeRoutes.js";
 import { OK_STATUS } from "../Models/Constants.js";
 import creditCardBill from "./CreditCardBillRoutes.js";
-import creditCard from "./CreditCardRoutes.js";
+import creditCardExpense from "./CreditCardExpenseRoutes.js";
 import NotFoundHandler from "../Middleware/NotFoundHandler.js";
 
 const routes = (app) => {
@@ -18,7 +18,7 @@ const routes = (app) => {
     investment,
     income,
     creditCardBill,
-    creditCard
+    creditCardExpense
   );
 
   app.use(NotFoundHandler);
