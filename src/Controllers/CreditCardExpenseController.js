@@ -92,6 +92,24 @@ function searchQueryHandler(params) {
     params;
 
   let search = {};
+  let expenseTemp = {};
+
+  if (bankName) search.bankName = { $regex: bankName, $options: "i" };
+
+  if (installments) search.installments = installments;
+
+  if (name) expense.name = { $regex: name, $options: "i" };
+
+  if (category) expense.category = category;
+
+  if (minValue || maxValue) expense.value = {};
+
+  if (minValue) expense.value.$gte = minValue;
+  if (maxValue) expense.value.$lte = maxValue;
+
+  search = { ...search, ...expenseTemp };
+
+  return search;
 }
 
 export default CreditCardExpenseController;
