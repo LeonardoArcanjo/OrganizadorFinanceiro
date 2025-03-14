@@ -12,22 +12,6 @@ class CreditCardExpenseController {
     }
   }
 
-  static searchCCExpenses(req, res, next) {
-    try {
-      let search = searchQueryHandler(req.query);
-
-      if (search !== null) {
-        const searchResult = creditCardExpense.find(req.query);
-        res.response = searchResult;
-        next();
-      } else if (searchResult.length === 0) {
-        res.status(NO_CONTENT).json(searchResult);
-      }
-    } catch (error) {
-      next(error);
-    }
-  }
-
   static async getCCExpenseById(req, res, next) {
     try {
       const ccExpenseId = req.params.id;
