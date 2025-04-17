@@ -5,6 +5,10 @@ const { Schema } = mongoose;
 const CreditCardBillSchema = new Schema(
   {
     id: { type: Types.ObjectId },
+    bank: {
+      type: String,
+      required: [true, "bank property value is required."],
+    },
     month: {
       type: String,
       required: [true, "month property value is required."],

@@ -1,12 +1,14 @@
 import CreditCardBill from "../Context/CreditCardBill.js";
+import NotFound from "../Errors/NotFound.js";
 import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
 
 class CreditCardBillController {
   // GET endpoints
   static async getAllCreditCardBill(req, res, next) {
     try {
-      const ccBill = await CreditCardBill.find({});
-      res.status(OK_STATUS).json(ccBill);
+      const ccBill = CreditCardBill.find();
+      req.response = ccBill;
+      next();
     } catch (error) {
       next(error);
     }
@@ -16,7 +18,12 @@ class CreditCardBillController {
     try {
       const ccBillId = req.params.id;
       const ccBill = await CreditCardBill.findById(ccBillId);
-      res.status(OK_STATUS).json(ccBill);
+
+      if (ccBill) {
+        res.status(OK_STATUS).json(ccBill);
+      } else {
+        next(new NotFound("Credit Card Bill not found."));
+      }
     } catch (error) {
       next(error);
     }
