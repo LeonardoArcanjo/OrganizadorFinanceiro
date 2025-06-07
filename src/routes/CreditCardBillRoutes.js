@@ -13,6 +13,10 @@ router
   .get("/creditCardBill/:id", CreditCardBillController.getCCBillById)
   .get("/creditCardBill/:Bank", CreditCardBillController.getCCBillByBank)
   .get(
+    "/creditCardBill/:expenseId",
+    CreditCardBillController.getCCBillExpenseById
+  )
+  .get(
     "/creditCardBill/:month&:year",
     CreditCardBillController.getCCBillByMonthAndYear
   )

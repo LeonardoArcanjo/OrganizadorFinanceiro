@@ -32,6 +32,7 @@ class CreditCardBillController {
   static async getCCBillByBank(req, res, next) {
     try {
       const bankName = req.params.bankName;
+      console.log(bankName);
       const ccBillListByBank = await CreditCardBill.find({
         CreditCardExpense: {
           bankName: `${bankName}`,
@@ -40,6 +41,27 @@ class CreditCardBillController {
       res.status(OK_STATUS).json(ccBillListByBank);
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async getCCBillExpenseById(req, res, next){
+    try {
+      const expenseId = req.params.expenseId;
+
+      const expense = await CreditCardBill.find({
+        CreditCardExpense: {
+          "expenseList": {
+            $elemMatch: {
+              id: expenseId
+            }
+          }
+        }
+      });
+
+      res.status(OK_STATUS).json(expense);
+    }
+    catch (error){
+      next(error)
     }
   }
 
