@@ -97,6 +97,8 @@ function searchQueryHandler(params) {
 
   if (minValue) search.value.$gte = minValue;
   if (maxValue) search.value.$lte = maxValue;
+
+  return search;
 }
 
 export default IncomeController;

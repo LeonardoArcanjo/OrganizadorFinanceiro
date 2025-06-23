@@ -99,7 +99,6 @@ function searchQueryHandler(params) {
   if (minValue) search.value.$gte = minValue;
   if (maxValue) search.value.$lte = maxValue;
 
-  console.log("expense: ", search);
   return search;
 }
 

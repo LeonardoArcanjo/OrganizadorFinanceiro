@@ -1,5 +1,6 @@
 import { creditCardExpense } from "../Context/CreditCardExpense.js";
-import { CREATE_STATUS, OK_STATUS } from "../Models/Constants.js";
+import NotFound from "../Errors/NotFound.js";
+import { CREATE_STATUS, NO_CONTENT, OK_STATUS } from "../Models/Constants.js";
 
 class CreditCardExpenseController {
   static getAllCreditCardExpenses(req, res, next) {
@@ -7,6 +8,23 @@ class CreditCardExpenseController {
       const ccExpenseList = creditCardExpense.find();
       req.response = ccExpenseList;
       next();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static searchCreditCardExpense(req, res, next) {
+    try {
+      let search = searchQueryHandler(req.query);
+
+      if (search !== null) {
+        const searchResult = creditCardExpense.findOne(search);
+
+        req.response = searchResult;
+        next();
+      } else if (searchResult.length === 0) {
+        res.status(NO_CONTENT).json(searchResult);
+      }
     } catch (error) {
       next(error);
     }
@@ -73,26 +91,24 @@ class CreditCardExpenseController {
 }
 
 function searchQueryHandler(params) {
-  // const { bankName, name, category, minValue, maxValue } = params;
-  const { bankName } = params;
+  const { bankName, name, category, minDate, maxDate } = params;
 
   let search = {};
 
   if (bankName) search.bankName = { $regex: bankName, $options: "i" };
 
-  // if (name) expense.name = { $regex: name, $options: "i" };
+  if (name) search["expense.name"] = { $regex: name, $options: "i" };
 
-  // if (category) expense.category = category;
+  if (category)
+    search["expense.category"] = { $regex: category, $options: "i" };
 
-  // if (minValue || maxValue) expense.value = {};
+  if (minDate || maxDate) {
+    if (minDate && maxDate)
+      search["expense.date"] = { $gte: minDate, $lte: maxDate };
+    else if (maxDate) search["expense.date"] = { $lte: maxDate };
+    else if (minDate) search["expense.date"] = { $gte: minDate };
+  }
 
-  // if (minValue) expense.value.$gte = minValue;
-  // if (maxValue) expense.value.$lte = maxValue;
-
-  // console.log("expense: ", ex);
-  // if (expenseTemp) search = { ...search, expense };
-
-  // console.log("Search: ", search);
   return search;
 }
 

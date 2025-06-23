@@ -10,6 +10,11 @@ router
     CreditCardExpenseController.getAllCreditCardExpenses,
     paginator
   )
+  .get(
+    "/creditCardExpense/search",
+    CreditCardExpenseController.searchCreditCardExpense,
+    paginator
+  )
   .get("/creditCardExpense/:id", CreditCardExpenseController.getCCExpenseById)
   .post("/creditCardExpense", CreditCardExpenseController.insertCCExpense)
   .put(
