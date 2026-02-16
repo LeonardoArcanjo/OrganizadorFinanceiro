@@ -5,7 +5,7 @@ const databasePwd = encodeURIComponent(process.env.DATABASE_PASSWORD); // encode
 
 async function connectDatabase() {
   mongoose.connect(
-    `mongodb+srv://${databaseLogin}:${databasePwd}@mycluster.g57a8jt.mongodb.net/OrganizadorFinanceiro?retryWrites=true&w=majority&appName=MyCluster`
+    `mongodb://${databaseLogin}:${databasePwd}@localhost:27017/FinancialDB?authSource=admin`
   );
 
   return mongoose.connection;
